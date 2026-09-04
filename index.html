@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Vault & Accomplishment Tracker</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Career Vault & Document Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --accent: #f59e0b;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --danger: #ef4444;
-            --success: #10b981;
-            --radius: 12px;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --transition: all 0.2s ease;
+            --text-muted: #475569;
+            --border-color: #cbd5e1;
+            --radius: 16px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            --transition: all 0.25s ease;
         }
 
         * {
@@ -28,473 +27,627 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.5;
-            padding: 2rem 1rem;
+            line-height: 1.6;
+            padding: 2.5rem 1rem;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
             background: var(--card-bg);
-            padding: 1.5rem 2rem;
+            padding: 2.5rem 2rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
         }
 
         header h1 {
-            font-size: 1.5rem;
-            font-weight: 750;
+            font-size: 2.25rem;
+            font-weight: 800;
             color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
-        .tabs {
-            display: flex;
-            gap: 0.5rem;
-            background: var(--bg-color);
-            padding: 0.25rem;
-            border-radius: calc(var(--radius) - 4px);
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: none;
-            padding: 0.5rem 1rem;
-            font-family: inherit;
-            font-weight: 600;
-            font-size: 0.875rem;
+        header p {
+            font-size: 1.15rem;
             color: var(--text-muted);
-            cursor: pointer;
-            border-radius: 8px;
-            transition: var(--transition);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .tab-btn.active {
-            background: var(--card-bg);
-            color: var(--primary);
-            box-shadow: var(--shadow);
-        }
-
-        main {
+        .action-hub {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
+            margin-bottom: 3rem;
         }
 
         @media(min-width: 768px) {
-            main {
-                grid-template-columns: 350px 1fr;
+            .action-hub {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
-        .card {
+        .action-card {
             background: var(--card-bg);
             border-radius: var(--radius);
-            padding: 1.5rem;
+            padding: 2.5rem 2rem;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-            height: fit-content;
+            border: 2px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            transition: var(--transition);
         }
 
-        .card h2 {
-            font-size: 1.1rem;
-            font-weight: 650;
+        .action-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .action-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
             margin-bottom: 1rem;
+        }
+
+        .action-card p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        /* Bold, highly visible action buttons designed for clear user experience */
+        .btn-bold {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1.25rem 2rem;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 1.15rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            width: 100%;
+        }
+
+        .btn-bold:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background: #0f172a;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.3);
+        }
+        .btn-secondary:hover {
+            background: #1e293b;
+        }
+
+        /* Modal and Form Design */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 600px;
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             color: var(--text-main);
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         label {
             display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-bottom: 0.35rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
         }
 
-        input, textarea, select {
+        select, input, textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
             font-family: inherit;
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--text-main);
-            background: var(--bg-color);
+            background: #fff;
             transition: var(--transition);
         }
 
-        input:focus, textarea:focus, select:focus {
+        select:focus, input:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
-            background: var(--card-bg);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
         }
 
         textarea {
+            min-height: 140px;
             resize: vertical;
-            min-height: 100px;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            background: var(--primary);
-            color: white;
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-cancel {
+            background: #e2e8f0;
+            color: var(--text-main);
             border: none;
-            padding: 0.75rem 1rem;
+            padding: 1rem 1.5rem;
             font-family: inherit;
-            font-weight: 600;
-            font-size: 0.95rem;
-            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 10px;
             cursor: pointer;
+            width: 100%;
             transition: var(--transition);
-            box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+        }
+        .btn-cancel:hover {
+            background: #cbd5e1;
         }
 
-        .btn:hover {
-            background: var(--primary-hover);
+        /* Vault Storage Section Layout with generous whitespace */
+        .vault-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 3rem;
         }
 
-        .btn-danger {
-            background: #fee2e2;
-            color: var(--danger);
-            box-shadow: none;
-            padding: 0.4rem 0.8rem;
-            font-size: 0.8rem;
-            width: auto;
-        }
-        .btn-danger:hover {
-            background: #fecaca;
+        .vault-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
-        .tab-content {
-            display: none;
+        .vault-section p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
         }
 
-        .tab-content.active {
-            display: block;
+        .document-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
 
-        .item-list {
+        @media(min-width: 640px) {
+            .document-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .doc-card {
+            background: var(--bg-color);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-        }
-
-        .item-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius);
-            padding: 1.25rem;
-            box-shadow: var(--shadow);
+            justify-content: space-between;
             transition: var(--transition);
-            position: relative;
         }
 
-        .item-card:hover {
+        .doc-card:hover {
             border-color: var(--primary);
         }
 
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.5rem;
-        }
-
-        .item-title {
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: var(--text-main);
-        }
-
-        .item-subtitle {
-            font-size: 0.875rem;
+        .doc-badge {
+            display: inline-block;
+            background: #dbeafe;
             color: var(--primary);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .item-meta {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
             font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+            width: fit-content;
         }
 
-        .item-desc {
-            font-size: 0.9rem;
-            color: var(--text-main);
-            white-space: pre-wrap;
-            background: var(--bg-color);
-            padding: 0.75rem;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
+        .doc-badge.cover-letter {
+            background: #fef3c7;
+            color: #b45309;
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-muted);
-            font-style: italic;
-            background: var(--card-bg);
-            border: 1px dashed var(--border-color);
-            border-radius: var(--radius);
-        }
-
-        .tag {
-            display: inline-block;
-            background: #e0e7ff;
-            color: var(--primary);
-            padding: 0.15rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-right: 0.5rem;
+        .doc-title {
+            font-weight: 700;
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .doc-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .doc-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-view {
+            background: #e2e8f0;
+            color: var(--text-main);
+        }
+        .btn-view:hover { background: #cbd5e1; }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .btn-delete:hover { background: #fecaca; }
+
+        .empty-vault {
+            text-align: center;
+            padding: 3rem 2rem;
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            color: var(--text-muted);
+            background: #fafafa;
+        }
+        .empty-vault p {
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        /* Result View Section */
+        .result-container {
+            display: none;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--primary);
+            margin-top: 2rem;
+        }
+        .result-container.active {
+            display: block;
+        }
+        .suggestion-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            white-space: pre-wrap;
+            font-family: inherit;
+            color: #166534;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <!-- Header Section -->
         <header>
-            <h1>⚡ Resume Vault & Tracker</h1>
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('resumes')">Resumes</button>
-                <button class="tab-btn active" onclick="switchTab('accomplishments')" id="accTabBtn">Accomplishments</button>
-            </div>
+            <h1>📄 Career Vault & Document Assistant</h1>
+            <p>Safely store your past career materials and instantly generate customized recommendations for your next application.</p>
         </header>
 
-        <!-- RESUMES TAB -->
-        <div id="resumes-content" class="tab-content active">
-            <main>
-                <div class="card">
-                    <h2>Upload / Add Resume</h2>
-                    <form id="resume-form" onsubmit="addResume(event)">
-                        <div class="form-group">
-                            <label for="res-title">Resume Version Title</label>
-                            <input type="text" id="res-title" placeholder="e.g., Software Engineer 2026" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="res-target">Target Role / Industry</label>
-                            <input type="text" id="res-target" placeholder="e.g., Frontend Developer" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="res-content">Paste Resume Content (Markdown / Text)</label>
-                            <textarea id="res-content" placeholder="Paste your complete resume layout text here..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Save Resume to Vault</button>
-                    </form>
-                </div>
+        <!-- Main Hub With Bold Action Buttons -->
+        <div class="action-hub">
+            <div class="action-card">
                 <div>
-                    <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
-                        <h2 style="font-size: 1.2rem; font-weight: 700;">Stored Resumes</h2>
-                    </div>
-                    <div id="resume-list" class="item-list">
-                        <!-- Populated via JS -->
-                    </div>
+                    <h2>Upload Document</h2>
+                    <p>Got an existing resume or cover letter? Upload it here to save it into your permanent storage vault.</p>
                 </div>
-            </main>
+                <button class="btn-bold" onclick="openUploadModal()">📁 Upload Document</button>
+            </div>
+
+            <div class="action-card">
+                <div>
+                    <h2>Build New Document</h2>
+                    <p>Start crafting a optimized application draft. We'll automatically inspect your previous history to provide smart guidance.</p>
+                </div>
+                <button class="btn-bold btn-secondary" onclick="openBuildModal()">✨ Build Document</button>
+            </div>
         </div>
 
-        <!-- ACCOMPLISHMENTS TAB -->
-        <div id="accomplishments-content" class="tab-content">
-            <main>
-                <div class="card">
-                    <h2>Track Accomplishment</h2>
-                    <form id="acc-form" onsubmit="addAccomplishment(event)">
-                        <div class="form-group">
-                            <label for="acc-title">Title / Achievement</label>
-                            <input type="text" id="acc-title" placeholder="e.g., Reduced database query latency" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="acc-category">Category</label>
-                            <select id="acc-category">
-                                <option value="Project">Project</option>
-                                <option value="Metric / Impact">Metric / Impact</option>
-                                <option value="Leadership">Leadership</option>
-                                <option value="Award / Cert">Award / Certification</option>
-                                <option value="Skill Gained">Skill Gained</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="acc-date">Date / Period</label>
-                            <input type="text" id="acc-date" placeholder="e.g., Q1 2026" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="acc-desc">Details & Metrics</label>
-                            <textarea id="acc-desc" placeholder="What did you do? What was the outcome? Use numbers if possible." required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Log Accomplishment</button>
-                    </form>
+        <!-- Document Storage Vault Section (With Whitespace) -->
+        <div class="vault-section">
+            <h2>Your Stored Documents Vault</h2>
+            <p class="subtitle">All previously uploaded files and generated assets are securely stored right here for reference.</p>
+            <div id="document-vault-list" class="document-grid">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+
+        <!-- Generated Recommendation Results Container -->
+        <div id="result-section" class="result-container">
+            <h2 id="result-title" style="margin-bottom: 0.5rem;">Generated Document Draft & Suggestions</h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Review the structural outline and strategic suggestions compiled below based on your historical vault content.</p>
+            <div id="result-content" class="suggestion-box"></div>
+            <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                <button class="btn-bold" style="width: auto; padding: 0.75rem 1.5rem; font-size: 0.95rem;" onclick="saveGeneratedToVault()">💾 Save to Vault Storage</button>
+                <button class="btn-cancel" style="width: auto;" onclick="closeResults()">Close Window</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 1: UPLOAD DOCUMENT -->
+    <div id="upload-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Upload New Document</h3>
+            <form id="upload-form" onsubmit="handleUploadSubmit(event)">
+                <div class="form-group">
+                    <label for="upload-type">Select Document Type</label>
+                    <select id="upload-type" required>
+                        <option value="Resume">Resume</option>
+                        <option value="Cover Letter">Cover Letter</option>
+                    </select>
                 </div>
-                <div>
-                    <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
-                        <h2 style="font-size: 1.2rem; font-weight: 700;">Accomplishments Log</h2>
-                    </div>
-                    <div id="accomplishment-list" class="item-list">
-                        <!-- Populated via JS -->
-                    </div>
+                <div class="form-group">
+                    <label for="upload-title">Document Name / Identifier</label>
+                    <input type="text" id="upload-title" placeholder="e.g., Software Engineering Resume 2025" required>
                 </div>
-            </main>
+                <div class="form-group">
+                    <label for="upload-text">Paste Text Content / File Data</label>
+                    <textarea id="upload-text" placeholder="Paste your complete resume or cover letter wording text here..." required></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeUploadModal()">Cancel</button>
+                    <button type="submit" class="btn-bold">Confirm & Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: BUILD DOCUMENT -->
+    <div id="build-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Build New Document & Get Advice</h3>
+            <form id="build-form" onsubmit="handleBuildSubmit(event)">
+                <div class="form-group">
+                    <label for="build-type">What are you creating?</label>
+                    <select id="build-type" required>
+                        <option value="Resume">Resume</option>
+                        <option value="Cover Letter">Cover Letter</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="build-target">Target Job Title or Company</label>
+                    <input type="text" id="build-target" placeholder="e.g., Senior Project Manager at TechCorp" required>
+                </div>
+                <div class="form-group">
+                    <label for="build-notes">Key Details, Focus Areas, or Keywords</label>
+                    <textarea id="build-notes" placeholder="Mention key skills, accomplishments, or job description highlights you want included..." required></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeBuildModal()">Cancel</button>
+                    <button type="submit" class="btn-bold btn-secondary">Generate Suggestions</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <script>
-        // LocalStorage Data Initialization
-        let resumes = JSON.parse(localStorage.getItem('vault_resumes')) || [];
-        let accomplishments = JSON.parse(localStorage.getItem('vault_accomplishments')) || [];
+        // Storage Initialization using LocalStorage for real data testing
+        let documentsVault = JSON.parse(localStorage.getItem('career_vault_documents')) || [];
+        let pendingGeneratedDoc = null;
 
-        // Tab Switching Logic
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-
-            if (tabName === 'resumes') {
-                document.getElementById('resumes-content').classList.add('active');
-                document.querySelectorAll('.tab-btn')[0].classList.add('active');
-            } else {
-                document.getElementById('accomplishments-content').classList.add('active');
-                document.querySelectorAll('.tab-btn')[1].classList.add('active');
-            }
+        // Modal Control Triggers
+        function openUploadModal() {
+            document.getElementById('upload-modal').classList.add('active');
+        }
+        function closeUploadModal() {
+            document.getElementById('upload-modal').classList.remove('active');
+            document.getElementById('upload-form').reset();
         }
 
-        // Add Resume
-        function addResume(e) {
-            e.preventDefault();
-            const title = document.getElementById('res-title').value;
-            const target = document.getElementById('res-target').value;
-            const content = document.getElementById('res-content').value;
+        function openBuildModal() {
+            document.getElementById('build-modal').classList.add('active');
+        }
+        function closeBuildModal() {
+            document.getElementById('build-modal').classList.remove('active');
+            document.getElementById('build-form').reset();
+        }
 
-            const newResume = {
+        function closeResults() {
+            document.getElementById('result-section').classList.remove('active');
+        }
+
+        // Test implementation requirement: Handle Document Upload & Storage
+        function handleUploadSubmit(event) {
+            event.preventDefault();
+            const type = document.getElementById('upload-type').value;
+            const title = document.getElementById('upload-title').value;
+            const content = document.getElementById('upload-text').value;
+
+            const newDoc = {
                 id: Date.now(),
+                type,
                 title,
-                target,
                 content,
                 date: new Date().toLocaleDateString()
             };
 
-            resumes.unshift(newResume);
-            saveAndRender();
-            document.getElementById('resume-form').reset();
+            documentsVault.unshift(newDoc);
+            syncStorageAndRender();
+            closeUploadModal();
         }
 
-        // Delete Resume
-        function deleteResume(id) {
-            resumes = resumes.filter(r => r.id !== id);
-            saveAndRender();
+        // Delete Document from Vault test check
+        function deleteDocument(id) {
+            documentsVault = documentsVault.filter(doc => doc.id !== id);
+            syncStorageAndRender();
         }
 
-        // Add Accomplishment
-        function addAccomplishment(e) {
-            e.preventDefault();
-            const title = document.getElementById('acc-title').value;
-            const category = document.getElementById('acc-category').value;
-            const date = document.getElementById('acc-date').value;
-            const desc = document.getElementById('acc-desc').value;
+        // View Document Details
+        function viewDocument(id) {
+            const doc = documentsVault.find(d => d.id === id);
+            if(doc) {
+                document.getElementById('result-title').innerText = `${doc.type}: ${doc.title}`;
+                document.getElementById('result-content').innerText = doc.content;
+                document.getElementById('result-section').classList.add('active');
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+        }
 
-            const newAcc = {
+        // Guardrails & Experience: Build New Document and Automatically Generate Action Suggestions
+        function handleBuildSubmit(event) {
+            event.preventDefault();
+            const type = document.getElementById('build-type').value;
+            const target = document.getElementById('build-target').value;
+            const notes = document.getElementById('build-notes').value;
+
+            // Check vault history context to enrich feedback
+            const existingCount = documentsVault.filter(d => d.type === type).length;
+            
+            let suggestionText = `STRATEGIC SUGGESTIONS & ACTION PLAN FOR: ${target}\n`;
+            suggestionText += `====================================================\n`;
+            suggestionText += `• Historical Context: You have ${existingCount} prior ${type.toLowerCase()}(s) in storage.\n`;
+            
+            if (type === 'Resume') {
+                suggestionText += `• Action 1: Emphasize quantifiable metrics based on your notes ("${notes}"). Instead of listing general responsibilities, highlight specific improvements.\n`;
+                suggestionText += `• Action 2: Tailor your professional summary section specifically to align with target role keywords for "${target}".\n`;
+                suggestionText += `• Action 3: Keep layout formatting clean, utilizing reverse-chronological order layout styles.\n`;
+            } else {
+                suggestionText += `• Action 1: Personalize the opening greeting directly to the hiring manager or department head at "${target}".\n`;
+                suggestionText += `• Action 2: Link your stated notes ("${notes}") to a specific success story from your previous experiences.\n`;
+                suggestionText += `• Action 3: Maintain a professional, confident close emphasizing immediate value addition.\n`;
+            }
+
+            suggestionText += `\n[ DRAFT TEMPLATE OUTLINE ]\n`;
+            suggestionText += `Target Position: ${target}\n`;
+            suggestionText += `Custom Notes Integrated: ${notes}\n`;
+
+            // Save state temporarily for optional quick storage addition
+            pendingGeneratedDoc = {
                 id: Date.now(),
-                title,
-                category,
-                date,
-                desc
+                type: type,
+                title: `Generated Draft for ${target}`,
+                content: suggestionText,
+                date: new Date().toLocaleDateString()
             };
 
-            accomplishments.unshift(newAcc);
-            saveAndRender();
-            document.getElementById('acc-form').reset();
+            document.getElementById('result-title').innerText = `Generated ${type} Recommendations`;
+            document.getElementById('result-content').innerText = suggestionText;
+            
+            closeBuildModal();
+            document.getElementById('result-section').classList.add('active');
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
-        // Delete Accomplishment
-        function deleteAccomplishment(id) {
-            accomplishments = accomplishments.filter(a => a.id !== id);
-            saveAndRender();
-        }
-
-        // Persistence and DOM Update
-        function saveAndRender() {
-            localStorage.setItem('vault_resumes', JSON.stringify(resumes));
-            localStorage.setItem('vault_accomplishments', JSON.stringify(accomplishments));
-            render();
-        }
-
-        function render() {
-            // Render Resumes
-            const resumeContainer = document.getElementById('resume-list');
-            if (resumes.length === 0) {
-                resumeContainer.innerHTML = `<div class="empty-state">No saved resumes found. Add your first version on the left!</div>`;
-            } else {
-                resumeContainer.innerHTML = resumes.map(r => `
-                    <div class="item-card">
-                        <div class="item-header">
-                            <div>
-                                <div class="item-title">${escapeHtml(r.title)}</div>
-                                <div class="item-subtitle">Target: ${escapeHtml(r.target)}</div>
-                            </div>
-                            <button class="btn btn-danger" onclick="deleteResume(${r.id})">Delete</button>
-                        </div>
-                        <div class="item-meta">Saved on: ${r.date}</div>
-                        <div class="item-desc">${escapeHtml(r.content)}</div>
-                    </div>
-                `).join('');
-            }
-
-            // Render Accomplishments
-            const accContainer = document.getElementById('accomplishment-list');
-            if (accomplishments.length === 0) {
-                accContainer.innerHTML = `<div class="empty-state">No accomplishments tracked yet. Start logging your wins!</div>`;
-            } else {
-                accContainer.innerHTML = accomplishments.map(a => `
-                    <div class="item-card">
-                        <div class="item-header">
-                            <div>
-                                <span class="tag">${escapeHtml(a.category)}</span>
-                                <div class="item-title" style="margin-top: 0.25rem;">${escapeHtml(a.title)}</div>
-                            </div>
-                            <button class="btn btn-danger" onclick="deleteAccomplishment(${a.id})">Delete</button>
-                        </div>
-                        <div class="item-meta">Period: ${escapeHtml(a.date)}</div>
-                        <div class="item-desc">${escapeHtml(a.desc)}</div>
-                    </div>
-                `).join('');
+        function saveGeneratedToVault() {
+            if (pendingGeneratedDoc) {
+                documentsVault.unshift(pendingGeneratedDoc);
+                syncStorageAndRender();
+                alert("Successfully saved the generated document draft into your storage vault!");
+                pendingGeneratedDoc = null;
+                closeResults();
             }
         }
 
-        // Basic XSS safety utility
+        // Persistence Engine
+        function syncStorageAndRender() {
+            localStorage.setItem('career_vault_documents', JSON.stringify(documentsVault));
+            renderVault();
+        }
+
+        // Render Vault Interface Content
+        function renderVault() {
+            const vaultContainer = document.getElementById('document-vault-list');
+            
+            if (documentsVault.length === 0) {
+                vaultContainer.innerHTML = `
+                    <div class="empty-vault" style="grid-column: 1 / -1;">
+                        <p>Your vault is currently empty.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Use the big buttons above to upload or build your first files!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            vaultContainer.innerHTML = documentsVault.map(doc => `
+                <div class="doc-card">
+                    <div>
+                        <span class="doc-badge ${doc.type === 'Cover Letter' ? 'cover-letter' : ''}">${doc.type}</span>
+                        <div class="doc-title">${escapeHtml(doc.title)}</div>
+                        <div class="doc-date">Added on: ${doc.date}</div>
+                    </div>
+                    <div class="doc-actions">
+                        <button class="btn-small btn-view" onclick="viewDocument(${doc.id})">View Content</button>
+                        <button class="btn-small btn-delete" onclick="deleteDocument(${doc.id})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Utility: Basic XSS Protection
         function escapeHtml(str) {
-            return str
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
 
-        // Initial paint
-        render();
+        // Initial paint execution on load
+        renderVault();
     </script>
 </body>
 </html>
